@@ -8,6 +8,8 @@ Both [Deno](https://deno.com/kv) and [Vercel](https://vercel.com/docs/storage/ve
 
 Instead use this with free stuff at runtime (compiled by Deno) on Cloudflare Workers. 
 
+This is just for learning about key-value stores. For a more serious project check out : [r2d2](https://github.com/iuioiua/r2d2)
+
 ### spec :
 Operations that are supported :
 
