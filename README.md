@@ -4,8 +4,9 @@ Deno.KV for the rest of us.
 
 ## Background:
 
-Both [Deno](https://deno.com/kv) and Vercel have release their in-built key-value storage for the runtimes for developers.
+Both [Deno](https://deno.com/kv) and [Vercel](https://vercel.com/docs/storage/vercel-kv) have release their in-built key-value storage for the runtimes for developers. But the cost is huge.
 
+Instead use this with free stuff at runtime (compiled by Deno).
 
 ### spec :
 Operations that are supported :
@@ -14,7 +15,7 @@ Operations that are supported :
   - SET  : set the given key to the particular value .
   - DELETE : delete the given key, if not given then raise Error.
   - COUNT : count the number of keys that have been set to the sepcific value.
-  - BEGIN
-  - END 
-  - ROLLBACK
-  - COMMIT 
+  - BEGIN : starts a transaction 
+  - END  : ends a transaction
+  - ROLLBACK :throw back any change.
+  - COMMIT : commit the change
