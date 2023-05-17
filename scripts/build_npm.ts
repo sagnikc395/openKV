@@ -12,7 +12,7 @@ await build({
   },
   package: {
     // package.json properties
-    name: "openKV",
+    name: "@sagnikc395/openKV",
     version: Deno.args[0],
     description: "an open source kv store for the rest of us",
     license: "MIT",
@@ -21,12 +21,12 @@ await build({
       url: "git+https://github.com/sagnikc395/openKV.git",
     },
     bugs: {
-      url: "https://github.com/username/repo/issues",
+      url: "https://github.com/sagnikc395/openKV/issues",
     },
   },
   postBuild() {
     // steps to run after building and before running the tests
-    Deno.copyFileSync("LICENSE", "npm/LICENSE");
+
     Deno.copyFileSync("README.md", "npm/README.md");
   },
 });
