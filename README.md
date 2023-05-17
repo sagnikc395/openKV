@@ -6,7 +6,7 @@ Deno.KV for the rest of us.
 
 Both [Deno](https://deno.com/kv) and [Vercel](https://vercel.com/docs/storage/vercel-kv) have release their in-built key-value storage for the runtimes for developers. But the cost is huge.
 
-Instead use this with free stuff at runtime (compiled by Deno).
+Instead use this with free stuff at runtime (compiled by Deno) on Cloudflare Workers. 
 
 ### spec :
 Operations that are supported :
