@@ -54,11 +54,6 @@ class TransactionStack {
       for (const key in this.top.store) {
         delete this.top.store[key];
       }
-      //write the change to the file systems
-      Deno.writeTextFileSync(
-        "./file.okv",
-        getStringRepresentation(GlobalStorage),
-      );
     }
   }
   public Commit(): void {
@@ -70,13 +65,71 @@ class TransactionStack {
           activeTransaction.next.store[key] = activeTransaction.store[key];
         }
       }
-      // write the change to the file system
-      Deno.writeTextFileSync(
-        "./file.okv",
-        getStringRepresentation(GlobalStorage),
-      );
     } else {
       console.error("COMMIT_ERROR: Nothing to commit.");
     }
   }
+  public Write(): void {
+    // write data to local
+    Deno.writeTextFileSync(
+      "./file.okv",
+      getStringRepresentation(GlobalStorage),
+    );
+  }
+}
+
+function Get(key: string, ts: TransactionStack): void {
+  const activeTransaction = ts.Peek();
+  if (activeTransaction === null) {
+    if (key in GlobalStorage) {
+      console.log(GlobalStorage[key]);
+    } else {
+      console.log(`${key} is not set.`);
+    }
+  } else {
+    if (key in activeTransaction.store) {
+      console.log(activeTransaction.store[key]);
+    } else {
+      console.log(`${key} is not set`);
+    }
+  }
+}
+
+function Set(key: string, value: string, ts: TransactionStack): void {
+  const activeTransaction = ts.Peek();
+  if (activeTransaction === null) {
+    GlobalStorage[key] = value;
+  } else {
+    activeTransaction.store[key] = value;
+  }
+}
+
+function Count(value: string, ts: TransactionStack): void {
+  let count = 0;
+  const activeTransaction = ts.Peek();
+
+  if (activeTransaction === null) {
+    for (const key in GlobalStorage) {
+      if (GlobalStorage[key] === value) {
+        count += 1;
+      }
+    }
+  } else {
+    for (const key in activeTransaction.store) {
+      if (activeTransaction.store[key] === value) {
+        count += 1;
+      }
+    }
+  }
+  console.log(count);
+}
+
+function Delete(key: string, ts: TransactionStack): void {
+  const activeTransaction = ts.Peek();
+  if (activeTransaction === null) {
+    delete GlobalStorage[key];
+  } else {
+    delete activeTransaction.store[key];
+  }
+  console.log(`${key} was deleted from kv.`);
 }
