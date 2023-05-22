@@ -1,6 +1,6 @@
 ## openKV
 
-Deno.KV for the rest of us.
+a open source KV written in Deno.
 
 ## Background:
 
